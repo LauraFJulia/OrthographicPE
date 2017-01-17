@@ -89,7 +89,7 @@ Rot(3*(1:M),:)=cross(Rot(3*(1:M)-2,:),Rot(3*(1:M)-1,:),2);
 Trans=zeros(3*M,1);
 Trans(setdiff(1:3*M,3*(1:M)))=T;
 Trans(3*(1:M))=focalL;
-s=vec(repmat((sum(reshape(norms,2,M),1)/2),3,1));
+s=reshape(repmat((sum(reshape(norms,2,M),1)/2),3,1),[],1);
 Trans=Trans./s;
 
 % depth ambiguity: second solution

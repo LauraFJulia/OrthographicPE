@@ -81,7 +81,7 @@ end
 
 % Optimization using Levenberg - Marquardt
 func=@(x)bundleadjustment_LM(x,Corresp,CalM);
-variables0=vec([angles0(:,2:M), translations0(:,2:M), Reconst0]);
+variables0=reshape([angles0(:,2:M), translations0(:,2:M), Reconst0],[],1);
 options = optimoptions(@lsqnonlin,'Algorithm','levenberg-marquardt','Jacobian','on','Display','off');
 [variables,~,~,~,output]=lsqnonlin(func,variables0,[],[],options);
 
