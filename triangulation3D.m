@@ -32,9 +32,9 @@ switch size(image_points,1)
         return
 end
 
-
+%func=@(x1,x2,x3)constraintsGH_triangulation(x1,x2,x3,Pcam);
 space_points=zeros(4,N);
-parfor n=1:N
+for n=1:N
     corresp_n=image_points(:,n);
     
     % DLT solution
@@ -49,14 +49,14 @@ parfor n=1:N
     space_points(:,n)=PointX;
     
 %     % Refinement using GH
-%     corresp_n_repr=zeros(2*I,1);
-%     for i=1:I
+%     corresp_n_repr=zeros(2*M,1);
+%     for i=1:M
 %         corresp_n_repr(2*(i-1)+1:2*(i-1)+2,:)=...
 %             (Pcam{i}(1:2,:)*PointX)/(Pcam{i}(3,:)*PointX);
 %     end
 %     y=zeros(0,1);
 %     X_est=PointX(1:3)./PointX(4);
-%     [~,X_opt,~]=Gauss_Helmert(@constraintsGH_triangulation,corresp_n_repr,X_est,y,corresp_n,eye(2*I),Pcam);
+%     [~,X_opt,~]=Gauss_Helmert(func,corresp_n_repr,X_est,y,corresp_n,eye(2*M));
 %     if sum(isfinite(X_opt))==3
 %         space_points(:,n)=[X_opt;1];
 %     end
