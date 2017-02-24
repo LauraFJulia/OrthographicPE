@@ -1,7 +1,7 @@
 # OrthographicPE
 Pose estimation of 3 views based on the orthographic model.
 
-This MATLAB(R) directory contains the code associated to the IPOL 2017 paper "The Orthographic Projection Model for Pose Calibration of Long Focal Images" by Laura F. Julia, Pascal Monasse and Marc Pierrot-Deseilligny.
+This MATLAB(R) directory contains the code associated to the IPOL submission "The Orthographic Projection Model for Pose Calibration of Long Focal Images" by Laura F. Julia, Pascal Monasse and Marc Pierrot-Deseilligny.
 
 ## CONTENT
 This directory should contain the following files and folders:
