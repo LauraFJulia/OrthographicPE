@@ -1,5 +1,5 @@
 function [new_points,N_matrix]=Normalize2Ddata(points)
-% Isometric Normalization of 2D pointa
+% Isometric Normalization of 2D points
 %
 % Given a set of points in R^2, outputs a normalization matrix that, applied
 % to the points (in homogeneous coordinates), transforms them into having 
