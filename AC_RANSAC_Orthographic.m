@@ -51,7 +51,7 @@ while it<max_it
     it=it+1;
     
     % pick random sample of n_sample data
-    rng(it);
+    rand('seed',it);
     sample=randsample(N,n_sample);
     
     % compute orientations with Orthographic model from this sample
@@ -112,7 +112,7 @@ while it<max_it
     %  error than the previous we keep it
     if k_min>k_inliers || (k_min==k_inliers && err_threshold<ransac_th)  
         k_inliers=k_min;
-        inliers=[sample.' nosample(ind_sorted(1:k_inliers-n_sample))];
+        inliers=[reshape(sample,1,[]), nosample(ind_sorted(1:k_inliers-n_sample))];
         ransac_th=err_threshold;
         Sol=Sol_it;
     end 
