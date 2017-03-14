@@ -6,7 +6,7 @@ function [Sol1,Sol2]=OrthographicPoseEstimation(Corresp,CalM)
 % The method used is the SCALED ORTHOGRAPHIC model as described in the IPOL
 % paper "The Orthographic Projection Model for Pose Calibration of Long 
 % Focal Images" by L. F. Julia, P. Monasse, M. Pierrot-Deseilligny and it
-% is based on the method by C. J. Poelman and T. Kanade.
+% is based on the factorization method by C. J. Poelman and T. Kanade.
 %
 % Input arguments:
 %  Corresp  - 2MxN matrix containing in each column, the M projections of
