@@ -82,14 +82,16 @@ end
 % Optimization using Levenberg - Marquardt
 func=@(x)bundleadjustment_LM(x,Corresp,CalM);
 variables0=reshape([angles0(:,2:M), translations0(:,2:M), Reconst0],[],1);
-options = optimoptions(@lsqnonlin,'Algorithm','levenberg-marquardt','Jacobian','on','Display','off');
+%options = optimoptions(@lsqnonlin,'Algorithm','levenberg-marquardt','Jacobian','on','Display','off');
+options = optimset('Algorithm','lm_svd_feasible','Jacobian','on','Display','off');
 [variables,~,~,~,output]=lsqnonlin(func,variables0,[],[],options);
 
 % Final reprojection error
 repr_err=norm(func(variables));
 
 % Total iterations in the optimization
-iter=output.iterations;
+% iter=output.iterations;
+iter=output.niter;
 
 % Recover final reconstruction and orientations & fix scale
 variables=reshape(variables,3,N+2*(M-1));
