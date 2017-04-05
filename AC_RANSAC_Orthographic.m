@@ -36,6 +36,9 @@ end
 if nargin<5 || isempty(NFA_th)
     NFA_th=1;
 end
+if nargin<6 || isempty(Octave)
+    Octave=false;
+end
 
 N=size(Corresp,2);
 n_sample=4; % minimal number of matching points for pose estimation
