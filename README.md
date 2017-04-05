@@ -25,8 +25,10 @@ pipeline_octave.m             | Example script for GNU Octave use
 ## SETUP & USAGE
 ### MATLAB
 1. You must have MATLAB software installed on your computer.
-2. Copy/move the 'OrthographicPE' folder to the MATLAB 'work' directory.
-3. Open MATLAB and add the 'OrthographicPE' directory to the Path.
+2. The folowing toolboxes are required:
+  * statistics_toolbox
+  * optimization_toolbox
+3. Copy/move the 'OrthographicPE' folder to the MATLAB 'work' directory.
 4. Run the example script pipeline_matlab.m to easily use the code. It contains all the necessary steps for the pose estimation of three perspective views using the orthographic model. The data used as example is in the data/ folder.
 
 ### OCTAVE
