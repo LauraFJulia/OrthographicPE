@@ -1,4 +1,4 @@
-function [R_t,Reconst,iter,repr_err]=BundleAdjustment(CalM,R_t_0,Corresp,Reconst0)
+function [R_t,Reconst,iter,repr_err]=BundleAdjustment(CalM,R_t_0,Corresp,Reconst0,Octave)
 % Bundle Adjustment for the pose estimation of M cameras and N 3D points.
 % The reprojection error of the N points to the M cameras is minimized over
 % the possible positions of the space points and orientations of the
@@ -19,6 +19,8 @@ function [R_t,Reconst,iter,repr_err]=BundleAdjustment(CalM,R_t_0,Corresp,Reconst
 %             seen in image m, then Corresp(2*m-1:2*m,n)=[NaN;NaN].
 %  Reconst0 - 3xN matrix containing an initial estimation of the N 3D
 %             points. If not provided, they will be estimated.
+%  Octave   - true if Octave is beign used, false if Matlab is used instead.
+%             Default value is false.
 %
 % Output arguments:
 %  R_t      - 3Mx4 matrix of M 3x4 matrices concatenated with the final 
@@ -26,8 +28,10 @@ function [R_t,Reconst,iter,repr_err]=BundleAdjustment(CalM,R_t_0,Corresp,Reconst
 %  Reconst  - 3xN matrix containing the final estimation of the N 3D points.
 %  iter     - number of iterations needed in L-M algorithm to reach
 %             the minimum.
-                
 
+if nargin<5 || isempty(Octave)
+  Octave=false;
+end
 
 M=size(Corresp,1)/2;    % Number of total images
 N=size(Corresp,2);      % Number of total 3D points to recover
@@ -40,7 +44,7 @@ for j=1:M
 end
 
 % If not provided, we compute a first triangulation of the 3D points
-if nargin<4
+if nargin<4 || isempty(Reconst0)
     Reconst0=zeros(3,N);
     for i=1:N
         points=[];
@@ -82,8 +86,11 @@ end
 % Optimization using Levenberg - Marquardt
 func=@(x)bundleadjustment_LM(x,Corresp,CalM);
 variables0=reshape([angles0(:,2:M), translations0(:,2:M), Reconst0],[],1);
-%options = optimoptions(@lsqnonlin,'Algorithm','levenberg-marquardt','Jacobian','on','Display','off');
-options = optimset('Algorithm','lm_svd_feasible','Jacobian','on','Display','off');
+if Octave
+  options = optimset('Algorithm','lm_svd_feasible','Jacobian','on','Display','off');
+else
+  options = optimoptions(@lsqnonlin,'Algorithm','levenberg-marquardt','Jacobian','on','Display','off');
+end
 [variables,~,~,~,output]=lsqnonlin(func,variables0,[],[],options);
 
 % Final reprojection error
