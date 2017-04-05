@@ -42,7 +42,7 @@ fprintf('%d tracks between the three images.\n',size(Corresp,2));
 
 
 %% A C RANSAC with Orthographic model %%%
-[inliers,Sol,ransac_th]=AC_RANSAC_Orthographic(Corresp,CalM,imsize,true);
+[inliers,Sol,ransac_th]=AC_RANSAC_Orthographic(Corresp,CalM,imsize,[],[],true);
 fprintf('%d inliers were found by AC-RANSAC.\n',length(inliers));
 
 %% Orthographic model with all inliers %%%
@@ -55,7 +55,7 @@ fprintf('Minimum reached for first solution with %d iterations. ',iter1);
 fprintf('Final reprojection error is %f.\n',repr_err1);
 
 R_t_0=[Sol2{1},Sol2{2}]; Reconst0=Sol2{3};
-[R_t_2,Reconst2,iter2,repr_err2]=BundleAdjustment(CalM,R_t_0,Corresp(:,inliers),Reconst0,true));
+[R_t_2,Reconst2,iter2,repr_err2]=BundleAdjustment(CalM,R_t_0,Corresp(:,inliers),Reconst0,true);
 fprintf('Minimum reached for second solution with %d iterations. ',iter2);
 fprintf('Final reprojection error is %f.\n',repr_err2);
 
