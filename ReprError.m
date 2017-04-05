@@ -18,7 +18,16 @@ function error=ReprError(ProjM,Corresp,Points3D)
 
 % computing dimensions
 N=size(Corresp,2);
-M=size(ProjM,2);
+
+if size(ProjM{1},2)==3
+    CalM=ProjM{1}; R_t=ProjM{2};
+    M=size(CalM,1)/3; ProjM=cell(1,M);
+    for m=1:M
+        ProjM{m}=CalM(3*(m-1)+(1:3),:)*R_t(3*(m-1)+(1:3),:);
+    end
+else
+    M=size(ProjM,2);
+end
 
 % compute 3D triangulation if necessary
 if nargin~=3
@@ -36,6 +45,7 @@ if size(Corresp,1)==3*M
 else
     Corresp=reshape(Corresp,2,N*M);
 end
+mask=~isnan(Corresp);
 
 % reproject points
 P=cell2mat(ProjM.');
@@ -43,8 +53,7 @@ Corresp_est=reshape(P*Points3D_est,3,M*N);
 Corresp_est=Corresp_est(1:2,:)./repmat(Corresp_est(3,:),2,1);
 
 % compute RMS of distances
-error= sqrt(mean(sum((Corresp_est-Corresp).^2,1)));
-
+error= sqrt(mean((Corresp(mask)-Corresp_est(mask)).^2)*2);
 end
 
 

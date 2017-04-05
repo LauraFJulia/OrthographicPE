@@ -37,9 +37,12 @@ M=size(Corresp,1)/2;    % Number of total images
 N=size(Corresp,2);      % Number of total 3D points to recover
 
 % Normalization of image points
+CalM0=CalM; Corresp0=Corresp;
 for j=1:M
-    [new_Corr,Normal]=Normalize2Ddata(Corresp(2*j-1:2*j,:));
-    Corresp(2*j-1:2*j,:)=new_Corr;
+    valid_indexes=~isnan(Corresp(2*j-1:2*j,:));
+    valid_indexes=valid_indexes(1,:)&valid_indexes(2,:);
+    [new_Corr,Normal]=Normalize2Ddata(Corresp(2*j-1:2*j,valid_indexes));
+    Corresp(2*j-1:2*j,valid_indexes)=new_Corr;
     CalM(3*j-2:3*j,:)=Normal*CalM(3*j-2:3*j,:);
 end
 
@@ -93,12 +96,13 @@ else
 end
 [variables,~,~,~,output]=lsqnonlin(func,variables0,[],[],options);
 
-% Final reprojection error
-repr_err=norm(func(variables));
-
 % Total iterations in the optimization
 % iter=output.iterations;
-iter=output.niter;
+if Octave
+    iter=output.niter;
+else
+    iter=output.iterations;
+end
 
 % Recover final reconstruction and orientations & fix scale
 variables=reshape(variables,3,N+2*(M-1));
@@ -112,6 +116,9 @@ for j=1:(M-1)
     R_t(3*j+(1:3),:)=[Rx*Ry*Rz, scale*translations(:,j)];
 end
 Reconst=scale*variables(:,2*(M-1)+1:2*(M-1)+N);
+
+% Final reprojection error
+repr_err=ReprError({CalM0,R_t},Corresp0,Reconst);
 end
 
 
@@ -155,7 +162,9 @@ for i=1:N
     % 3D point corresponding to correspondence i
     Point=space_points(:,i);
     for j=1:M
+        ind=2*M*(i-1)+2*(j-1);
         if isnan(Corresp(2*j-1,i))
+            f(ind+1:ind+2)=NaN;
             continue;
         end
         
@@ -169,10 +178,9 @@ for i=1:N
         % point in image j for correspondence i
         point=Corresp(2*j-1:2*j,i);
 
-        ind=2*M*(i-1)+2*(j-1);
         % f: distance from p to projection P_j*P
         [aux,dgamma]=Gamma(P*[Point;1]);
-        [aux,dxdist,dydist]=Dist(point,aux);
+        [aux,~,dydist]=Dist(point,aux);
         f(ind+1:ind+2)=aux;
 
         % Jacobians for f
@@ -193,6 +201,10 @@ for i=1:N
         J(ind+1:ind+2,:)=dydist*dgamma*Jac;
     end
 end
+
+valid_equations=find(~isnan(f(:,1)));
+f=f(valid_equations,:);
+J=J(valid_equations,:);
 
 end
 

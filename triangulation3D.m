@@ -13,7 +13,6 @@ function space_points=triangulation3D(Pcam,image_points)
 % space_points - 4xN-array containing the 3d estimated positions (in
 %                 homogeneous coordinates) of the image points.
 
-
 M=size(Pcam,2); % number of images
 if M<2
     return
@@ -32,34 +31,26 @@ switch size(image_points,1)
         return
 end
 
-%func=@(x1,x2,x3)constraintsGH_triangulation(x1,x2,x3,Pcam);
+
 space_points=zeros(4,N);
 for n=1:N
     corresp_n=image_points(:,n);
     
     % DLT solution
+    valid_indexes=true(1,2*M);
     ls_matrix=zeros(2*M,4); %linear system matrix
     for i=1:M
         point=corresp_n(2*(i-1)+1:2*(i-1)+2,:);
+        if sum(isfinite(point))<2
+            valid_indexes(2*(i-1)+(1:2))=false;
+            continue;
+        end
         ls_matrix(2*(i-1)+1:2*(i-1)+2,:)=...
             [0 -1 point(2); 1 0 -point(1)]*Pcam{i};
     end
-    [~,~,V]=svd(ls_matrix);
+    [~,~,V]=svd(ls_matrix(valid_indexes,:));
     PointX=V(:,4);
     space_points(:,n)=PointX;
-    
-%     % Refinement using GH
-%     corresp_n_repr=zeros(2*M,1);
-%     for i=1:M
-%         corresp_n_repr(2*(i-1)+1:2*(i-1)+2,:)=...
-%             (Pcam{i}(1:2,:)*PointX)/(Pcam{i}(3,:)*PointX);
-%     end
-%     y=zeros(0,1);
-%     X_est=PointX(1:3)./PointX(4);
-%     [~,X_opt,~]=Gauss_Helmert(func,corresp_n_repr,X_est,y,corresp_n,eye(2*M));
-%     if sum(isfinite(X_opt))==3
-%         space_points(:,n)=[X_opt;1];
-%     end
 end
 
 

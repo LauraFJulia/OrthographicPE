@@ -10,6 +10,8 @@ function [new_points,N_matrix]=Normalize2Ddata(points)
 %
 % Output arguments:
 % N - 3x3 - isometric normalization matrix
+% new_points - 3xn - vector of the n normalized points of dimension 2 in
+%                    homogeneous coordinates
 
 n=size(points,2);
 points0=mean(points,2);
