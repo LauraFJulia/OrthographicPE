@@ -1,15 +1,15 @@
 function [inliers,Sol,ransac_th]=AC_RANSAC_Orthographic(Corresp,CalM,imsize,NFA_th,max_it,Octave)
-% AC-RANSAC applied to the Scaled Orthographic Model for finding the inlier
-% tracks between three orthographic views.
+%AC_RANSAC_ORTHOGRAPHIC A Contrario RANSAC applied to the Scaled Orthographic
+% Model for finding the inlier tracks between three orthographic views.
 %
-% The implementation of AC-RANSAC (A contrario random sample consensus)
-% is based on the paper of P. Moulon, P. Monasse, R. Marlet: Adaptive
-% Structure from Motion with a contrario model estimation.
+%  The implementation of AC-RANSAC (A contrario random sample consensus)
+%  is based on the paper of P. Moulon, P. Monasse, R. Marlet: Adaptive
+%  Structure from Motion with a contrario model estimation.
 % 
-% The pose estimation with the orthographic model relies on the function
-% OrthographicPoseEstimation.
+%  The pose estimation with the orthographic model relies on the function
+%  OrthographicPoseEstimation.
 %
-% Input arguments:
+%  Input arguments:
 %  Corresp    - 6xN matrix containing in each column, the 3 projections of
 %               the same space point onto the 3 images.
 %  CalM       - 9x3 matrix containing the 3 calibration 3x3 matrices for 
@@ -21,13 +21,30 @@ function [inliers,Sol,ransac_th]=AC_RANSAC_Orthographic(Corresp,CalM,imsize,NFA_
 %  Octave     - true if Octave is beign used, false if Matlab is used instead.
 %               Default value is false.
 %
-% Output arguments:
+%  Output arguments:
 %  inliers    - indexes indicating the final inliers in Data.
 %  Sol        - final orientation giving such set of inliers in the format
 %               of a 1x5-cell, Sol={Rot,Trans,Reconst, R, T}, the same as
 %               the output of function OrthographicPoseEstimation.
 %  ransac_th  - threshold used for ransac given by the AC method and
 %               used in the final model&inliers computation.
+
+% Copyright (c) 2017 Laura F. Julia <laura.fernandez-julia@enpc.fr>
+% All rights reserved.
+%
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+% 
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 
 % default parameters max_it and NFA_th
 if nargin<4 || isempty(max_it)

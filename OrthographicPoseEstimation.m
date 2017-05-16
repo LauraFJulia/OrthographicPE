@@ -1,21 +1,21 @@
 function [Sol1,Sol2]=OrthographicPoseEstimation(Corresp,CalM)
-% Pose estimation by the Orthographic Scaled model
+%ORTHOGRAPHICPOSEESTIMATION Pose estimation by the Scaled-Orthographic model
 %
-% Computation of the orientation of M perspective cameras from N 
-% corresponding tracks of image points and their internal paramaters.
-% The method used is the SCALED ORTHOGRAPHIC model as described in the IPOL
-% paper "The Orthographic Projection Model for Pose Calibration of Long 
-% Focal Images" by L. F. Julia, P. Monasse, M. Pierrot-Deseilligny and it
-% is based on the factorization method by C. J. Poelman and T. Kanade.
+%  Computation of the orientation of M perspective cameras from N 
+%  corresponding tracks of image points and their internal paramaters.
+%  The method used is the SCALED ORTHOGRAPHIC model as described in the IPOL
+%  submission "The Orthographic Projection Model for Pose Calibration of Long 
+%  Focal Images" by L. F. Julia, P. Monasse, M. Pierrot-Deseilligny and it
+%  is based on the factorization method by C. J. Poelman and T. Kanade.
 %
-% Input arguments:
+%  Input arguments:
 %  Corresp  - 2MxN matrix containing in each column, the M projections of
 %             the same space point onto the M images.
 %  CalM     - 3Mx3 matrix containing the M calibration 3x3 matrices for 
 %             each camera concatenated.
 %
-% Output arguments: the two possible solutions Sol1, Sol2, in format of
-%                   1x5-cell. Sol={Rot,Trans,Reconst, R, T} where:
+%  Output arguments: the two possible solutions Sol1, Sol2, in format of
+%                    1x5-cell. Sol={Rot,Trans,Reconst, R, T} where:
 % 
 %  Rot      - 3Mx3 matrix containing the M 3x3 rotation matrices for each 
 %             camera concatenated. The first will always be the identity.
@@ -25,6 +25,23 @@ function [Sol1,Sol2]=OrthographicPoseEstimation(Corresp,CalM)
 %             correspondences.
 %  R, T     - 2Mx3 motion matrix and 2Mx1 translation matrix in terms of
 %             the orthographic model
+
+% Copyright (c) 2017 Laura F. Julia <laura.fernandez-julia@enpc.fr>
+% All rights reserved.
+%
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+% 
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 
 N=size(Corresp,2);      % number of correspondences
 M=size(Corresp,1)/2;    % number of views

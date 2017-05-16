@@ -1,17 +1,34 @@
 function space_points=triangulation3D(Pcam,image_points)
-% Triangulation of N 3d points from their image points in M>1 images.
+%TRIANGULATION3D Triangulation of N 3D points from their image points in M>1 images.
 %
-% The triangulation is initially computed by the DLT algorithm and refined
-% by minimizing reprojection error using Gauss-Helmert method
+%  The triangulation is computed by the DLT algorithm.
 %
-% Input arguments:
-%       P      - M-cell of projection 3x4-matrices
-% image_points - 2MxN-matrix with the image points in each image
-%        or    - 3MxN-matrix with the image points in each image with
-%                homogeneous coord
-% Output arguments:
-% space_points - 4xN-array containing the 3d estimated positions (in
+%  Input arguments:
+%  Pcam         - M-cell of projection 3x4-matrices
+%  image_points - 2MxN or 3MxN matrix containing the image points for each
+%                 camera if they are known or NaN otherwise. Both cartesian
+%                 and homogeneous coordinates are accepted.
+%
+%  Output arguments:
+%  space_points - 4xN-array containing the 3d estimated positions (in
 %                 homogeneous coordinates) of the image points.
+
+% Copyright (c) 2017 Laura F. Julia <laura.fernandez-julia@enpc.fr>
+% All rights reserved.
+%
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+% 
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+% 
+% You should have received a copy of the GNU General Public License
+% along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 
 M=size(Pcam,2); % number of images
 if M<2

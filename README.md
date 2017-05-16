@@ -1,25 +1,30 @@
 # OrthographicPE
 Pose estimation of 3 views based on the orthographic model.
 
+Laura F. Julia, <laura.fernandez-julia@enpc.fr>, Univ. Paris Est, LIGM, ENPC, France
+
+Version 1.0, May 2017
+
+Future releases and updates:
+https://github.com/LauraFJ/OrthographicPE.git
+
 This MATLAB(R) / GNU OCTAVE directory contains the code associated to the IPOL submission "The Orthographic Projection Model for Pose Calibration of Long Focal Images" by Laura F. Julia, Pascal Monasse and Marc Pierrot-Deseilligny.
 
 ## CONTENT
 This directory should contain the following files and folders:
 
-Files                         | Description
-:---------------------------- | :------------------------------------------------------------------
-data/                         | folder with three example images and their correspondences by pairs
-README.md                     | this file
-LICENSE                       | license file
-OrthographicPoseEstimation.m  | pose estimation of N orthographic views from corresponding tracks
-AC_RANSAC_Orthographic.m      | a contrario RANSAC adapted to the orthographic model
-BundleAdjustment.m            | function computing bundle adjustment for an initial pose
-matches2triplets.m            | function to extract tracks from pairs of correspondences
-triangulation3D.m             | 3d triangulation from image points and camera matrices
-Normalize2Ddata.m             | isometric normalization of 2D points
-ReprError.m                   | computation of the reprojection error of N points and M cameras
-pipeline_matlab.m             | Example script for Matlab use
-pipeline_octave.m             | Example script for GNU Octave use
+data/                         - folder with three example images and their correspondences by pairs
+README.md                     - this file
+LICENSE                       - license file
+OrthographicPoseEstimation.m  - pose estimation of N orthographic views from corresponding tracks
+AC_RANSAC_Orthographic.m      - a contrario RANSAC adapted to the orthographic model
+BundleAdjustment.m            - function computing bundle adjustment for an initial pose
+matches2triplets.m            - function to extract tracks from pairs of correspondences
+triangulation3D.m             - 3d triangulation from image points and camera matrices
+Normalize2Ddata.m             - isometric normalization of 2D points
+ReprError.m                   - computation of the reprojection error of N points and M cameras
+pipeline_matlab.m             - Example script for Matlab use
+pipeline_octave.m             - Example script for GNU Octave use
 
 
 ## SETUP & USAGE
@@ -42,4 +47,23 @@ pkg install -forge statistics
 pkg install -forge optim
 ```
 3. Run the example script pipeline_octave.m to easily use the code. It contains all the necessary steps for the pose estimation of three perspective views using the orthographic model. The data used as example is in the data/ folder.
+
+
+## COPYRIGHT & LICENCE
+Copyright (c) 2017 Laura F. Julia <laura.fernandez-julia@enpc.fr>
+All rights reserved.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 
