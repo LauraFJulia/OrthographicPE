@@ -85,3 +85,12 @@ end
 R2=Solution(4:6,1:3); t2=Solution(4:6,4);
 R3=Solution(7:9,1:3); t3=Solution(7:9,4);
 
+
+%% PLY file
+
+R_t=[eye(3,4);[R2,t2];[R3,t3]];
+writePLYreconstruction('data/recontruction.ply',CalM,R_t,Reconst);
+
+
+
+
