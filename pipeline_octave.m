@@ -23,6 +23,7 @@ close all;
 pkg load statistics;
 pkg load optim;
 
+addpath("lib/");
 
 %% Dataset info %%%
 im_path='data/';
@@ -87,8 +88,12 @@ else
     Reconst=Reconst2;
 end
 
-%% Orientations 
+%% Orientations %%%
 R2=Solution(4:6,1:3); t2=Solution(4:6,4);
 R3=Solution(7:9,1:3); t3=Solution(7:9,4);
 
 
+%% PLY file %%%
+Color=paintReconstruction(Corresp(1:2,:),strcat(im_path,image_names{1}));
+writePLYreconstruction('data/recontruction.ply',CalM,Solution,Reconst,Color);
+writeOrientations('data/orientations.txt',Solution);

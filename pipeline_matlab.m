@@ -21,14 +21,14 @@ close all;
 
 %% Dataset info %%%
 im_path='data/';
-images_names={'_MG_0441.JPG','_MG_0445.JPG','_MG_0447.JPG'};
+image_names={'_MG_0441.JPG','_MG_0445.JPG','_MG_0447.JPG'};
 corresp_files={'corresp__MG_0441.JPG__MG_0445.JPG.txt',...
     'corresp__MG_0445.JPG__MG_0447.JPG.txt',...
     'corresp__MG_0441.JPG__MG_0447.JPG.txt'};
 imsize=[3744;5616]; focal=1000*156;
 CalM=repmat([focal,0,imsize(1)/2;0,focal,imsize(2)/2;0,0,1],3,1);
 
-%% Read matches from files
+%% Read matches from files %%%
 
 % read matches between image 1 and image 2
 dataFile = fopen(strcat(im_path,corresp_files{1}),'r');
@@ -81,16 +81,15 @@ else
     Reconst=Reconst2;
 end
 
-%% Orientations 
+%% Orientations %%%
 R2=Solution(4:6,1:3); t2=Solution(4:6,4);
 R3=Solution(7:9,1:3); t3=Solution(7:9,4);
 
 
-%% PLY file
-
-R_t=[eye(3,4);[R2,t2];[R3,t3]];
-writePLYreconstruction('data/recontruction.ply',CalM,R_t,Reconst);
-
+%% PLY file %%%
+Color=paintReconstruction(Corresp(1:2,:),strcat(im_path,image_names{1}));
+writePLYreconstruction('data/recontruction.ply',CalM,Solution,Reconst,Color);
+writeOrientations('data/orientations.txt',Solution);
 
 
 

@@ -49,6 +49,7 @@ for m=1:M
     fprintf(file,'%d %d 0 255 0\n',ind+3, ind+1);
 end
 
+fclose(file);
 
 
 

@@ -14,15 +14,10 @@ Files and folders
 -----------------
 
 data/                         - folder with three example images and their correspondences by pairs
+lib/			      - folder with auxiliary Matlab functions
 README.md                     - this file
 LICENSE                       - license file
-OrthographicPoseEstimation.m  - pose estimation of N orthographic views from corresponding tracks
-AC_RANSAC_Orthographic.m      - a contrario RANSAC adapted to the orthographic model
-BundleAdjustment.m            - function computing bundle adjustment for an initial pose
-matches2triplets.m            - function to extract tracks from pairs of correspondences
-triangulation3D.m             - 3d triangulation from image points and camera matrices
-Normalize2Ddata.m             - isometric normalization of 2D points
-ReprError.m                   - computation of the reprojection error of N points and M cameras
+OrthographicPoseEstimation.m  - Main function for pose estimation of orthographic views
 pipeline_matlab.m             - Example script for Matlab use
 pipeline_octave.m             - Example script for GNU Octave use
 
