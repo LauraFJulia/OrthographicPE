@@ -5,7 +5,7 @@ Laura F. Julia, <laura.fernandez-julia@enpc.fr>, Univ. Paris Est, LIGM, ENPC, Fr
 Version ??, May 2017
 
 Future releases and updates:
-https://github.com/LauraFJ/OrthographicPE.git
+https://github.com/LauraFJulia/OrthographicPE.git
 
 This MATLAB(R) / GNU OCTAVE directory contains the code associated to the IPOL submission "The Orthographic Projection Model for Pose Calibration of Long Focal Images" by Laura F. Julia, Pascal Monasse and Marc Pierrot-Deseilligny.
 
