@@ -13,13 +13,13 @@ This MATLAB(R) / GNU OCTAVE directory contains the code associated to the IPOL s
 Files and folders
 -----------------
 
-data/                         - folder with three example images and their correspondences by pairs
+data/                         - folder with 3 example images and their correspondences by pairs
 lib/			      - folder with auxiliary Matlab functions
 README.md                     - this file
 LICENSE                       - license file
 OrthographicPoseEstimation.m  - Main function for pose estimation of orthographic views
-pipeline_matlab.m             - Example script for Matlab use
-pipeline_octave.m             - Example script for GNU Octave use
+example_matlab.m              - Example script for Matlab use
+example_octave.m              - Example script for GNU Octave use
 
 
 Setup and Usage
@@ -32,7 +32,7 @@ MATLAB
   * statistics_toolbox
   * optimization_toolbox
 3. Copy/move the 'OrthographicPE' folder to the MATLAB 'work' directory.
-4. Run the example script pipeline_matlab.m to easily use the code. It contains all the necessary steps for the pose estimation of three perspective views using the orthographic model. The data used as example is in the data/ folder.
+4. Run the example script example_matlab.m to easily use the code. It contains all the necessary steps for the pose estimation of three perspective views using the orthographic model. The data used as example is in the data/ folder.
 
 OCTAVE
 ------
@@ -45,7 +45,7 @@ OCTAVE
  pkg install -forge statistics
  pkg install -forge optim
 
-3. Run the example script pipeline_octave.m to easily use the code. It contains all the necessary steps for the pose estimation of three perspective views using the orthographic model. The data used as example is in the data/ folder.
+3. Run the example script example_octave.m to easily use the code. It contains all the necessary steps for the pose estimation of three perspective views using the orthographic model. The data used as example is in the data/ folder.
 
 
 Copyright and Licence
