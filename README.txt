@@ -2,7 +2,7 @@ Pose estimation of 3 views based on the orthographic model.
 
 Laura F. Julia, <laura.fernandez-julia@enpc.fr>, Univ. Paris Est, LIGM, ENPC, France
 
-Version ??, May 2017
+Version 0.1, May 2017
 
 Future releases and updates:
 https://github.com/LauraFJulia/OrthographicPE.git
@@ -14,7 +14,7 @@ Files and folders
 -----------------
 
 data/                         - folder with 3 example images and their correspondences by pairs
-lib/			      - folder with auxiliary Matlab functions
+lib/                          - folder with auxiliary Matlab functions
 README.md                     - this file
 LICENSE                       - license file
 OrthographicPoseEstimation.m  - Main function for pose estimation of orthographic views
