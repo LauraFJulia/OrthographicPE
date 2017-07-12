@@ -15,8 +15,8 @@ Files and folders
 
 data/                         - folder with 3 example images and their correspondences by pairs
 lib/                          - folder with auxiliary Matlab functions
-README.md                     - this file
-LICENSE                       - license file
+README.txt                    - this file
+LICENSE.txt                   - license file
 OrthographicPoseEstimation.m  - Main function for pose estimation of orthographic views
 example_matlab.m              - Example script for Matlab use
 example_octave.m              - Example script for GNU Octave use
