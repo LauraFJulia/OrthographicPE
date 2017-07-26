@@ -5,7 +5,7 @@ function y = my_randsample(n,k)
 % Returns a k-by-1 vector of values sampled uniformly at random,
 % without replacement, from the integers 1 to n.
 
-assert(k<=n, "Error in my_randsample: k must not exceed n")
+assert(k<=n, 'Error in my_randsample: k must not exceed n')
 
 y = [];
 for i=0:k-1
@@ -14,7 +14,7 @@ for i=0:k-1
     % find j-th element in 1:n \setminus y
     l = 1;
     while l<=i && y(l)<=j
-        ++l; ++j;
+        l=l+1; j=j+1;
     end
     % insert j in vector y
     y = [y(1:l-1) j y(l:end)];
