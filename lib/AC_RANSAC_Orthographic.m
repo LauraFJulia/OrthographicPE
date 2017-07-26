@@ -78,7 +78,7 @@ while it<max_it
     else
       rng(it);
     end
-    sample=randsample(N,n_sample);
+    sample=my_randsample(N,n_sample);
     
     % compute orientations with Orthographic model from this sample
     % (if the function fails, we start a new iteration)

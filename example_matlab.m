@@ -19,6 +19,8 @@
 clear;
 close all;
 
+addpath('lib');
+
 %% Dataset info %%%
 im_path='data/';
 image_names={'_MG_0441.JPG','_MG_0445.JPG','_MG_0447.JPG'};

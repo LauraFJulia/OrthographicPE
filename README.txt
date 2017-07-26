@@ -28,8 +28,7 @@ Setup and Usage
 MATLAB
 ------
 1. You must have MATLAB software installed on your computer.
-2. The folowing toolboxes are required:
-  * statistics_toolbox
+2. The folowing toolbox is required:
   * optimization_toolbox
 3. Copy/move the 'OrthographicPE' folder to the MATLAB 'work' directory.
 4. Run the example script example_matlab.m to easily use the code. It contains all the necessary steps for the pose estimation of three perspective views using the orthographic model. The data used as example is in the data/ folder.
@@ -40,9 +39,8 @@ OCTAVE
 
  sudo apt-get install octave
 
-2. Two packages are necessary to run the functions in this directory: statistics and optim. To install them, run the following commands in the Octave terminal:
+2. One package is necessary to run the functions in this directory: optim. To install it, run the following commands in the Octave terminal:
 
- pkg install -forge statistics
  pkg install -forge optim
 
 3. Run the example script example_octave.m to easily use the code. It contains all the necessary steps for the pose estimation of three perspective views using the orthographic model. The data used as example is in the data/ folder.
@@ -66,5 +64,3 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-
