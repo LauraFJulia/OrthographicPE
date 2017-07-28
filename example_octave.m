@@ -26,14 +26,17 @@ pkg load optim;
 
 %% Dataset info %%%
 im_path='data/';
-image_names={'_MG_0441.JPG','_MG_0445.JPG','_MG_0447.JPG'};
-corresp_files={'corresp__MG_0441.JPG__MG_0445.JPG.txt',...
-    'corresp__MG_0445.JPG__MG_0447.JPG.txt',...
-    'corresp__MG_0441.JPG__MG_0447.JPG.txt'};
-imsize=[3744;5616]; focal=1000*156;
+image_names={'input_0.png','input_1.png','input_2.png'};
+corresp_files={'01.txt','12.txt','02.txt'};
+info=imfinfo(strcat(im_path,image_names{1}));
+imsize=[info.Width;info.Height];
+zoomFactor=8; % zoom-out factor from original images
+pixPerMm=imsize(1)*zoomFactor/24; % Canon EOS Mark ii sensor: 24x36mm
+focalMm=1000; // 1000mm focal length
+focal=focalMm*pixPerMm;
 CalM=repmat([focal,0,imsize(1)/2;0,focal,imsize(2)/2;0,0,1],3,1);
 
-%% Read matches from files
+%% Read matches from files %%%
 
 % read matches between image 1 and image 2
 dataFile = fopen(strcat(im_path,corresp_files{1}),'r');
@@ -76,7 +79,6 @@ R_t_0=[Sol2{1},Sol2{2}]; Reconst0=Sol2{3};
 [R_t_2,Reconst2,iter2,repr_err2]=BundleAdjustment(CalM,R_t_0,Corresp(:,inliers),Reconst0,true);
 fprintf('Minimum reached for second solution with %d iterations. ',iter2);
 fprintf('Final reprojection error is %f.\n',repr_err2);
-
 
 %% Choose solution with less repr. err. %%%
 if repr_err1<repr_err2
