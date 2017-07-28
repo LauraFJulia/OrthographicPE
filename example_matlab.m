@@ -29,7 +29,7 @@ info=imfinfo(strcat(im_path,image_names{1}));
 imsize=[info.Width;info.Height];
 zoomFactor=8; % zoom-out factor from original images
 pixPerMm=imsize(1)*zoomFactor/24; % Canon EOS Mark ii sensor: 24x36mm
-focalMm=1000; // 1000mm focal length
+focalMm=1000; % 1000mm focal length
 focal=focalMm*pixPerMm;
 CalM=repmat([focal,0,imsize(1)/2;0,focal,imsize(2)/2;0,0,1],3,1);
 
