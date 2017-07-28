@@ -19,15 +19,14 @@
 clear;
 close all;
 
-%% Load packages %%%
-pkg load statistics;
-pkg load optim;
+addpath('lib');
 
-addpath("lib/");
+%% Load packages %%%
+pkg load optim;
 
 %% Dataset info %%%
 im_path='data/';
-images_names={'_MG_0441.JPG','_MG_0445.JPG','_MG_0447.JPG'};
+image_names={'_MG_0441.JPG','_MG_0445.JPG','_MG_0447.JPG'};
 corresp_files={'corresp__MG_0441.JPG__MG_0445.JPG.txt',...
     'corresp__MG_0445.JPG__MG_0447.JPG.txt',...
     'corresp__MG_0441.JPG__MG_0447.JPG.txt'};
