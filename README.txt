@@ -1,6 +1,7 @@
 Pose estimation of 3 views based on the orthographic model.
 
 Laura F. Julia, <laura.fernandez-julia@enpc.fr>, Univ. Paris Est, LIGM, ENPC, France
+Pascal Monasse, <monasse@imagine.enpc.fr>, Univ. Paris Est, LIGM, ENPC, France
 
 Version 0.1, May 2017
 
