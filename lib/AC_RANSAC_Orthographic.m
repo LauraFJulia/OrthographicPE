@@ -1,4 +1,4 @@
-function [inliers,Sol,ransac_th]=AC_RANSAC_Orthographic(Corresp,CalM,imsize,NFA_th,max_it,Octave)
+function [inliers,Sol,ransac_th]=AC_RANSAC_Orthographic(Corresp,CalM,imsize,NFA_th,max_it)
 %AC_RANSAC_ORTHOGRAPHIC A Contrario RANSAC applied to the Scaled Orthographic
 % Model for finding the inlier tracks between three orthographic views.
 %
@@ -18,8 +18,6 @@ function [inliers,Sol,ransac_th]=AC_RANSAC_Orthographic(Corresp,CalM,imsize,NFA_
 %  NFA_th     - threshold for NFA that establishes the validity of a
 %               model (1 by default).
 %  max_it     - maximum number of iterations for ransac (100 by default).
-%  Octave     - true if Octave is beign used, false if Matlab is used instead.
-%               Default value is false.
 %
 %  Output arguments:
 %  inliers    - indexes indicating the final inliers in Data.
@@ -53,9 +51,6 @@ end
 if nargin<5 || isempty(NFA_th)
     NFA_th=1;
 end
-if nargin<6 || isempty(Octave)
-    Octave=false;
-end
 
 N=size(Corresp,2);
 n_sample=4; % minimal number of matching points for pose estimation
@@ -71,13 +66,6 @@ ransac_th=inf;        % ransac threshold
 it=0; max_old=max_it;
 while it<max_it
     it=it+1;
-    
-    % pick random sample of n_sample data
-    if Octave
-      rand('seed',it);
-    else
-      rng(it);
-    end
     sample=my_randsample(N,n_sample);
     
     % compute orientations with Orthographic model from this sample
