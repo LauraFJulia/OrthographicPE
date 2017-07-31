@@ -71,12 +71,12 @@ fprintf('%d inliers were found by AC-RANSAC.\n',length(inliers));
 
 %% B A for both possible solutions %%%
 R_t_0=[Sol1{1},Sol1{2}]; Reconst0=Sol1{3};
-[R_t_1,Reconst1,iter1,repr_err1]=BundleAdjustment(CalM,R_t_0,Corresp(:,inliers),Reconst0,true);
+[R_t_1,Reconst1,iter1,repr_err1]=BundleAdjustment(CalM,R_t_0,Corresp(:,inliers),Reconst0);
 fprintf('Minimum reached for first solution with %d iterations. ',iter1);
 fprintf('Final reprojection error is %f.\n',repr_err1);
 
 R_t_0=[Sol2{1},Sol2{2}]; Reconst0=Sol2{3};
-[R_t_2,Reconst2,iter2,repr_err2]=BundleAdjustment(CalM,R_t_0,Corresp(:,inliers),Reconst0,true);
+[R_t_2,Reconst2,iter2,repr_err2]=BundleAdjustment(CalM,R_t_0,Corresp(:,inliers),Reconst0);
 fprintf('Minimum reached for second solution with %d iterations. ',iter2);
 fprintf('Final reprojection error is %f.\n',repr_err2);
 
