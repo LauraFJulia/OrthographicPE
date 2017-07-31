@@ -21,6 +21,8 @@ close all;
 
 addpath('lib');
 
+rng('shuffle');
+
 %% Dataset info %%%
 im_path='data/';
 image_names={'input_0.png','input_1.png','input_2.png'};

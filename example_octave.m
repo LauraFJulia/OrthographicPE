@@ -63,7 +63,7 @@ fprintf('%d tracks between the three images.\n',size(Corresp,2));
 
 
 %% A C RANSAC with Orthographic model %%%
-[inliers,Sol,ransac_th]=AC_RANSAC_Orthographic(Corresp,CalM,imsize,[],[],true);
+[inliers,Sol,ransac_th]=AC_RANSAC_Orthographic(Corresp,CalM,imsize);
 fprintf('%d inliers were found by AC-RANSAC.\n',length(inliers));
 
 %% Orthographic model with all inliers %%%
