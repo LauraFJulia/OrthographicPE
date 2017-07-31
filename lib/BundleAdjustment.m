@@ -44,7 +44,7 @@ function [R_t,Reconst,iter,repr_err]=BundleAdjustment(CalM,R_t_0,Corresp,Reconst
 % along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-Octave=(exist("OCTAVE_VERSION", "builtin") > 0);
+Octave=(exist('OCTAVE_VERSION', 'builtin') > 0);
 
 M=size(Corresp,1)/2;    % Number of total images
 N=size(Corresp,2);      % Number of total 3D points to recover
