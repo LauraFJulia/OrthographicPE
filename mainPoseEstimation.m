@@ -7,6 +7,9 @@ corresp_files={'01.txt','12.txt','02.txt'};
 
 info=imfinfo(strcat(im_path,image_names{1}));
 imsize=[info.Width;info.Height];
+if ~isa(focal,'double')
+    focal=str2double(focal);
+end
 CalM=repmat([focal,0,imsize(1)/2;0,focal,imsize(2)/2;0,0,1],3,1);
 
 %% Read matches from files %%%
