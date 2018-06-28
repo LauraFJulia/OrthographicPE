@@ -75,5 +75,6 @@ Color=paintReconstruction(Corresp(1:2,:),strcat(im_path,image_names{1}));
 writePLYreconstruction('data/reconstruction.ply',CalM,Solution,Reconst,Color);
 writeOrientations('data/orientations.txt',Solution);
 dlmwrite('data/tracks.txt',Corresp.','delimiter',' ');
+dlmwrite('data/inliers.txt',Corresp(:,inliers).','delimiter',' ');
 
 end
