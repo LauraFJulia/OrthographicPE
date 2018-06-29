@@ -1,6 +1,7 @@
-% Example Matlab script for Orthographic Pose Estimation
+% Example script for Orthographic Pose Estimation
 
 % Copyright (c) 2017 Laura F. Julia <laura.fernandez-julia@enpc.fr>
+%               2018 Pascal Monasse <monasse@imagine.enpc.fr>
 % All rights reserved.
 %
 % This program is free software: you can redistribute it and/or modify
@@ -16,12 +17,17 @@
 % You should have received a copy of the GNU General Public License
 % along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+% Octave/Matlab specifics
+if exist('OCTAVE_VERSION', 'builtin')
+    pkg load optim;
+else
+    rng('shuffle');
+end
+
 clear;
 close all;
 
 addpath('lib');
-
-rng('shuffle');
 
 %% Dataset info %%%
 im_path='data/';

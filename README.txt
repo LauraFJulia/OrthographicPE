@@ -18,9 +18,9 @@ data/                         - folder with 3 example images and their correspon
 lib/                          - folder with auxiliary Matlab functions
 README.txt                    - this file
 LICENSE.txt                   - license file
-OrthographicPoseEstimation.m  - Main function for pose estimation of orthographic views
-example_matlab.m              - Example script for Matlab use
-example_octave.m              - Example script for GNU Octave use
+OrthographicPoseEstimation.m  - main function for pose estimation of orthographic views
+mainPoseEstimation.m          - do I/O and call OrthographicPoseEstimation
+example.m                     - example script
 
 
 Setup and Usage
@@ -29,28 +29,24 @@ Setup and Usage
 MATLAB
 ------
 1. You must have MATLAB software installed on your computer.
-2. The folowing toolbox is required:
+2. The following toolbox is required:
   * optimization_toolbox
-3. Copy/move the 'OrthographicPE' folder to the MATLAB 'work' directory.
-4. Run the example script example_matlab.m to easily use the code. It contains all the necessary steps for the pose estimation of three perspective views using the orthographic model. The data used as example is in the data/ folder.
+3. Run the example script example.m to easily use the code. It contains all the necessary steps for the pose estimation of three perspective views using the orthographic model. The data used as example is in the data/ folder.
 
 OCTAVE
 ------
 1. You must have GNU Octave installed on you computer. You can install it in Ubuntu systems running the following command:
 
- sudo apt-get install octave
+ sudo apt-get install octave octave-optim
 
-2. One package is necessary to run the functions in this directory: optim. To install it, run the following commands in the Octave terminal:
-
- pkg install -forge optim
-
-3. Run the example script example_octave.m to easily use the code. It contains all the necessary steps for the pose estimation of three perspective views using the orthographic model. The data used as example is in the data/ folder.
+2. Run the example script example.m.
 
 
 Copyright and Licence
 ---------------------
 
 Copyright (c) 2017 Laura F. Julia <laura.fernandez-julia@enpc.fr>
+              2018 Pascal Monasse <monasse@imagine.enpc.fr>
 All rights reserved.
 
 This program is free software: you can redistribute it and/or modify
