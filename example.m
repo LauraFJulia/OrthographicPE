@@ -1,13 +1,7 @@
-function writeOrientations(file_name,R_t)
-%WRITEORIENTATIONS creates a txt file with the rotations and translations
-% of M views.
-%
-%  Input arguments:
-%  file_name  - string containing the name of the file
-%  R_t        - 3Mx4 matrix containing the global rotation and translation
-%               [R,t] for each camera
+% Example script for Orthographic Pose Estimation
 
 % Copyright (c) 2017 Laura F. Julia <laura.fernandez-julia@enpc.fr>
+%               2018 Pascal Monasse <monasse@imagine.enpc.fr>
 % All rights reserved.
 %
 % This program is free software: you can redistribute it and/or modify
@@ -23,16 +17,27 @@ function writeOrientations(file_name,R_t)
 % You should have received a copy of the GNU General Public License
 % along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-M=size(R_t,1)/3;
-file = fopen(file_name, 'wt');
-fprintf(file,'%% [R t] matrices of %d cameras.\n',M);
-for m=1:M
-    fprintf(file, 'P%d=[\n', m-1);
-    for j=1:3
-        i=3*(m-1)+j;
-        fprintf(file,'     %f %f %f %f\n', R_t(i,1),R_t(i,2),R_t(i,3),R_t(i,4));
-    end
-    fprintf(file, ']\n');
+% Octave/Matlab specifics
+if exist('OCTAVE_VERSION', 'builtin')
+    pkg load optim;
+else
+    rng('shuffle');
 end
-fclose(file);
 
+clear;
+close all;
+
+addpath('lib');
+
+%% Dataset info %%%
+im_path='data/';
+image_names={'input_0.png','input_1.png','input_2.png'};
+info=imfinfo(strcat(im_path,image_names{1}));
+imsize=[info.Width;info.Height];
+
+zoomFactor=8; % zoom-out factor from original images
+pixPerMm=imsize(1)*zoomFactor/24; % Canon EOS Mark ii sensor: 24x36mm
+focalMm=1000; % 1000mm focal length
+focal=focalMm*pixPerMm;
+
+mainPoseEstimation(focal);

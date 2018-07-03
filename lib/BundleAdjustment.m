@@ -1,4 +1,4 @@
-function [R_t,Reconst,iter,repr_err]=BundleAdjustment(CalM,R_t_0,Corresp,Reconst0,Octave)
+function [R_t,Reconst,iter,repr_err]=BundleAdjustment(CalM,R_t_0,Corresp,Reconst0)
 %BUNDLEADJUSTMENT Bundle Adjustment for the pose estimation of M cameras and N 3D points.
 %
 %  The reprojection error of the N points to the M cameras is minimized over
@@ -19,8 +19,6 @@ function [R_t,Reconst,iter,repr_err]=BundleAdjustment(CalM,R_t_0,Corresp,Reconst
 %             seen in image m, then Corresp(2*m-1:2*m,n)=[NaN;NaN].
 %  Reconst0 - 3xN matrix containing an initial estimation of the N 3D
 %             points. If not provided, they will be estimated.
-%  Octave   - true if Octave is beign used, false if Matlab is used instead.
-%             Default value is false.
 %
 %  Output arguments:
 %  R_t      - 3Mx4 matrix of M 3x4 matrices concatenated with the final 
@@ -46,9 +44,7 @@ function [R_t,Reconst,iter,repr_err]=BundleAdjustment(CalM,R_t_0,Corresp,Reconst
 % along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-if nargin<5 || isempty(Octave)
-  Octave=false;
-end
+Octave=(exist('OCTAVE_VERSION', 'builtin') > 0);
 
 M=size(Corresp,1)/2;    % Number of total images
 N=size(Corresp,2);      % Number of total 3D points to recover
